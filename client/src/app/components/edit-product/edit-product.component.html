@@ -1,0 +1,44 @@
+<div class="edit-item-container" *ngIf="_productsService.productIdsToEdit.includes(product.id!)">
+    <label [for]="'prodName-'+product.id" class="prodName-label">
+        <h4 class="title">{{product.name}}</h4>
+    </label>
+    <input type="checkbox" name="prodName" [id]="'prodName-'+product.id" class="prodName" [checked]="_productsService.isCheckedArrForEdit[product.id!]||false" (click)="setIsChecked($event)">
+    <div class="edit-form">
+        <div class="update-product-form">
+            <form #fNewProd="ngForm" (ngSubmit)="onSubmitEditProduct(fNewProd)" class="flex-space-between">
+                <h5>Edit Product Details: </h5>
+                <div class="form-flex">
+                    <label for="categoryId">Category: </label>
+                    <select [(ngModel)]="categoryId" name="categoryId">
+                        <option value=0 selected disabled>Select Category</option>
+                        <option *ngFor="let c of _productsService.categories" [value]="c.id">{{c.category}}</option>
+                    </select>
+                    <label for="name">Product Name: </label>
+                    <input type="text" [(ngModel)]="name" name="name" placeholder="Product Name"/>
+                    <label for="price">Price: </label>
+                    <input type="number" [(ngModel)]="price" name="price" placeholder="Price"/>
+                </div>
+                <button class="general-btn yellow-btn edit-product-btn">Edit</button>
+            </form>
+        </div>
+        <div class="picture-form">
+            <div class="img-container">
+                <h5 *ngIf="product.picture!.length >0">Double Click to Delete Image:</h5>
+                <div class="image-overflow">
+                    <img *ngFor="let pic of product.picture" title="delete" class="uploaded-image-display" [src]="'/assets/images/uploads/'+pic" alt="" (dblclick)="removeImage(pic)">
+                    <img *ngIf="fileUrl"  class="uploaded-image-display-preview uploaded-image-display" [src]="fileUrl" alt="">
+                </div>
+            </div>
+            <form #f="ngForm" class="upload-image-form">
+                <label [for]="'upload-image-'+product.id" class="choose-picture-label">Choose a New Image</label>
+                <input required type="file" name="myImage" [id]="'upload-image-'+product.id" accept="image/*" (change)="selectImage($event)" [ngStyle]="{'display':'none'}"/>
+                <input [disabled]="!file" type="submit" value="Upload" class="upload-picture-btn" (click)="onSubmit(f)"/>
+            </form>
+        </div>
+    </div>
+        <div>
+            <button (click)="_productsService.editProductDisplay(product.id!)" class="general-btn yellow-btn done-editing-product-btn">&nbsp;&times; DONE EDITING &times;&nbsp;</button>
+            <button (dblclick)="removeProduct()" (click)="_userService.displayResponseMessage('Are you sure? Double click to delete.')" class="general-btn delete-product-btn">&nbsp;&times; DELETE PRODUCT &times;&nbsp;</button>
+        </div>
+    <hr>
+</div>

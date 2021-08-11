@@ -1,0 +1,171 @@
+.uploaded-image-display {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 1px;
+    background: none;
+    outline: none;
+    border: 2px solid
+}
+
+.uploaded-image-display:hover {
+    filter:invert(30%);
+    cursor: pointer;
+}
+
+.uploaded-image-display-preview {
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.prodName {
+    display: none;
+    flex-direction: column;
+    margin: 20px 0 20px 0;
+}
+
+.edit-form {
+    display: none;
+    margin: 20px 0 20px 0;
+}
+
+form input, form select {
+    margin: 5px;
+    padding: 5px;
+}
+
+.prodName:checked ~ .edit-form{
+    display: flex;
+}
+
+.img-container{
+    width: 100%;
+}
+
+.img-container div {
+    display: inline;
+}
+
+.picture-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.picture-form form {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.edit-form {
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 5px;
+    background: rgba( 255, 255, 255, 0.25 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+}
+
+.edit-form > * {
+    margin: 10px;
+}
+
+.prodName-label {
+    cursor: pointer;
+}
+
+.title {
+    padding: 5px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 100%;
+}
+
+.title:hover {
+    background-color: rgba(250, 128, 114, 0.5);
+    border-radius: 25px;
+}
+
+.title:hover::after {
+    content: " ✏"
+}
+
+.title:hover::before {
+    content: "✏ "
+}
+
+.form-flex {
+    display: flex;
+    flex-direction: column;
+}
+.flex-space-between {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.delete-btn {
+    background-color: rgb(0, 139, 204);
+    font-weight: bolder;
+    font-size: x-large;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.upload-image-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choose-picture-label {
+    height: 30px;
+    padding-left: 5px;
+    display: flex;
+    border-radius: 50px 0 0 50px;
+    align-items: center;
+}
+.upload-picture-btn{
+    border-radius: 0 50px 50px 0;
+    padding-right: 5px;
+    height: 30px;
+    background-color: none;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+}
+.choose-picture-label:hover , .upload-picture-btn:hover{
+    cursor: pointer;
+    background-color: rgba(255, 217, 0, 0.5);
+}
+.upload-picture-btn:disabled:hover{
+    cursor: default;
+    background-color: rgba(61, 61, 61, 0.575);
+}
+
+.delete-product-btn, .done-editing-product-btn{
+    width: 50%;
+}
+
+.edit-product-btn {
+    width: 100%;
+}
+
+
+.delete-product-btn:hover {
+    background-color: rgba(250, 50, 50, 0.664);
+    border: 5px solid rgba(255, 229, 229, 0.726);
+    color: white
+}
+
+.edit-item-container {
+    width: 100%;
+}

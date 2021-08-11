@@ -1,0 +1,11 @@
+<h2>Add a Profile Picture</h2>
+<form #f="ngForm">
+  <label for="myImageRegister" class="myImageLabel">
+    <img
+          [src]="fileUrl?fileUrl:'../assets/images/profiles/shoppingcart.jpg'"
+          alt="some picture here"
+        />
+  </label>
+  <input type="file" name="myImage" id="myImageRegister" accept="image/*" (change)="selectImage($event)" />
+  <input class="general-btn yellow-btn disabled-btn" [disabled]="!file" type="submit" value="Upload" (click)="onSubmit(f)"/>
+</form>

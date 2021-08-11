@@ -1,0 +1,8 @@
+<div class="login-container">
+    <h2>Log In</h2>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <input type="email" [(ngModel)]="email" name="email" placeholder="email" required/>
+        <input type="password" [(ngModel)]="password" name="password" placeholder="password" required/>
+        <button type="submit" class="general-btn yellow-btn disabled-btn"  [disabled]="f.invalid">Submit</button>
+    </form>
+</div>

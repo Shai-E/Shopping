@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <mate charest="utf-8" />
+        <title>Receipt</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+            .item {
+                padding: 10px;
+                text-transform: capitalize;
+            }
+
+            html {
+                font-family: "Montserrat", sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            Receipt: {{receiptId}}
+            <hr/>
+            <h3>For: {{user.firstName}} {{user.lastName}} <br/><span style="font-size: x-small;">ID: {{user.id}}</span></h3>
+            <p>
+                <b>Email:</b> {{user.email}}
+                <br/>
+                <br/>
+                <b>
+                    Address:
+                </b>
+                <br/>
+                &emsp;{{user.city}}
+                <br/>
+                &emsp;{{user.street}}
+            </p>
+            <hr/>
+            <div style="text-align: center; font-weight: bold;">
+                <h1>Total: {{total}} &#8362;</h1>
+            </div>
+            <hr/>
+            <br/>
+            {{#each products}}
+            <p class="item"><b>{{this.name}}</b> ({{this.amount}}) | price: {{this.price}} &#8362;</p>
+            {{/each}}
+            <hr/>
+            Card: ****-****-****-{{payment}}
+        </div>
+    </body>
+</html>

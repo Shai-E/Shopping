@@ -1,0 +1,33 @@
+<input type="checkbox" name="start-menu-toggle" id="start-menu-toggle" [checked]="_userService.isStartMenuChecked" (change)="toggleCheckbox()"/>
+<div class="startMenu">
+    <div class="startMenu-body">
+        <app-status-link (click)="switchDisplay()" [routerLink]="_userService.user.id?'../shop':''">
+            <p *ngIf="_userService.user.isAdmin==false">
+                {{_userService.cart.length===0?"Start":"Resume"}} Shopping
+            </p>
+            <p *ngIf="_userService.user.isAdmin==true">
+                Control Panel
+            </p>
+            <p *ngIf="_userService.status==='LOGIN'">Sign Up</p>
+            <p *ngIf="_userService.status==='REGISTER_ONE'" >Go Back</p>
+            <p *ngIf="_userService.status==='REGISTER_TWO'||_userService.status==='REGISTER_THREE'">Skip for Now</p>
+        </app-status-link>
+        <app-login *ngIf="_userService.status==='LOGIN'"></app-login>
+        <app-register-step-one *ngIf="_userService.status==='REGISTER_ONE'"></app-register-step-one>
+        <app-register-step-two *ngIf="_userService.status==='REGISTER_TWO'"></app-register-step-two>
+        <app-register-step-three *ngIf="_userService.status==='REGISTER_THREE'"></app-register-step-three>
+        <button *ngIf="_userService.user.id" (click)="logUserOut()" class="general-btn yellow-btn">Logout</button>
+    </div>
+    <label for="start-menu-toggle" id="start-menu-toggle-label">
+        <div class="startMenu-header">
+            <h1 *ngIf="_userService.user.isAdmin==false">
+                {{_userService.cart.length===0?"Start":"Resume"}} Shopping
+            </h1>
+            <h1 *ngIf="_userService.user.isAdmin==true">
+                Control Panel
+            </h1>
+            <h1 *ngIf="!_userService.user.id">Sign In</h1>
+            <hr>
+        </div>
+    </label>
+</div>

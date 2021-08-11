@@ -1,0 +1,2 @@
+To run the server use 'npm start' or 'npm run dev' if you're using nodemon.
+To run the client use `npm run noreload` to prevent the site from reloading when new files are added to the assets folder.

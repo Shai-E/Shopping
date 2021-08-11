@@ -1,0 +1,19 @@
+POST http://localhost:3002/shopping/api/orders/204457097
+Content-Type: application/json
+
+{
+    "card": "1234567812345678",
+    "date": "2021-06-07",
+    "city": "Netanya",
+    "street": "Blah"
+}
+
+
+###
+
+GET http://localhost:3002/shopping/api/orders/count
+
+###
+
+
+GET http://localhost:3002/shopping/api/orders/invalid-dates

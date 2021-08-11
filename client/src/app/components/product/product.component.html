@@ -1,0 +1,67 @@
+<div class="product">
+  <div class="specs-container">
+    <div class="info-container">
+      <h5 class="capitalize doselect">
+        {{ product.name }}
+      </h5>
+      <p>{{ product.price }}₪</p>
+    </div>
+    <div class="add-product-form" *ngIf="_userService.user.isAdmin == false">
+      <select name="size" (change)="setSize($event)">
+        <option value="" selected disabled>Select Size</option>
+        <option value="x-small">x-small</option>
+        <option value="small">small</option>
+        <option value="medium">medium</option>
+        <option value="large">large</option>
+        <option value="x-large">x-large</option>
+      </select>
+      <button
+        [disabled]="size === ''"
+        (click)="toggleSetAmount()"
+        class="icon-btn"
+      >
+        <img src="assets/images/icons/add_shopping_cart_black_24dp.svg" alt="">
+      </button>
+    </div>
+    <div class="add-product-form" *ngIf="_userService.user.isAdmin == true">
+      <button
+        class="general-btn yellow-btn edit-product-toggle-btn"
+        (click)="_productsService.editProductDisplay(product.id!)"
+      >
+        {{
+          _productsService.productIdsToEdit.includes(product.id!)
+            ? "Done Editing"
+            : "Edit Product"
+        }}
+      </button>
+    </div>
+  </div>
+  <div class="switch-pictures">
+    <img
+    class="product-img-list-item"
+    *ngFor="let pic of product.picture; let i = index;"
+    (mouseover)="changeItem(i)"
+    [ngClass]="i===picIdx?'active-picture':''"
+      [src]="'../assets/images/uploads/' + pic"
+    />
+  </div>
+  <div class="img-container">
+    <img
+    class="main-product-image"
+      *ngIf="product.picture && product.picture.length === 0"
+      src='../assets/images/uploads/empty-closet.jpg'
+    />
+    <img
+    class="main-product-image"
+      *ngIf="product.picture && product.picture.length > 0"
+      [src]="'../assets/images/uploads/' + product.picture[picIdx]"
+    />
+  </div>
+</div>
+<div class="set-amount" *ngIf="setAmount">
+  <button (click)="addProductToCart(product.id!)" class="general-btn yellow-btn">Add Product</button>
+  <hr>
+  <p>Qty: <span class="amount-btn" (click)="setLess()"> - </span> {{amount}} <span class="amount-btn" (click)="setMore()"> + </span> </p>
+  <hr>
+  <button (click)="toggleSetAmount()" class="general-btn">Dismiss</button>
+</div>

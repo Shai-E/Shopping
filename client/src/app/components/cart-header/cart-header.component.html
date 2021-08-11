@@ -1,0 +1,33 @@
+<div class="cart-header">
+    <div class="cart-status" *ngIf="!isReadyToPlaceOrder">
+      <div>
+        <h2>{{_userService.user.firstName}}'s Cart</h2>
+        {{
+          _userService.cart.length !== 0
+            ? "There " +
+            (_userService.cart.length === 1 ? "is " : "are ") +
+              _userService.cart.length +
+              " item" +
+              (_userService.cart.length === 1 ? "" : "s") +
+              " in your cart."
+            : "Cart is empty"
+        }}
+      </div>
+    </div>
+    <div class="delivery-info" *ngIf="isReadyToPlaceOrder">
+      <div class="user-details">
+        <h3>
+          {{ _userService.user.firstName }} {{ _userService.user.lastName }}
+        </h3>
+        <br />
+        <h4>Address</h4>
+        <p>
+          {{ city || _userService.user.city }},
+          {{ street || _userService.user.street }}
+        </p>
+      </div>
+      <div class="search-container">
+        <input *ngIf="isReadyToPlaceOrder" placeholder="Search Cart" type="text" name="searchKey" [(ngModel)]="searchKey" (keyup)="setSearchKey()">
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,66 @@
+<div class="status">
+  <div class="status-header">
+    <hr />
+    <h1>WELCOME</h1>
+  </div>
+  <div class="status-body">
+    <img
+      [src]="
+        _userService.user.picture
+          ? '../assets/images/profiles/' + _userService.user.picture
+          : '../assets/images/profiles/shoppingcart.jpg'
+      "
+      alt="some picture here"
+      [routerLink]="_userService.user.id ? '../profile' : '../home'"
+      [ngClass]="_userService.user.id ? 'pointer' : ''"
+    />
+    <app-status-message [ngStyle]="{ 'text-transform': 'capitalize' }">
+      hello&nbsp;<span *ngIf="!_userService.user.firstName">guest</span
+      ><span *ngIf="_userService.user.firstName"
+        >{{ _userService.user.firstName }}
+        {{ _userService.user.lastName }}</span
+      >
+    </app-status-message>
+    <div
+      class="not-admin"
+      *ngIf="_userService.user.isAdmin == false || !_userService.user.id"
+    >
+      <app-status-message
+        *ngIf="_userService.user.id && _userService.cart.length === 0"
+        >Make your first purchase today!</app-status-message
+      >
+      <app-status-message *ngIf="_userService.cart.length > 0"
+        >You have an open cart from
+        {{ _userService.cart[0].date | date }}</app-status-message
+      >
+      <app-status-message
+        *ngIf="
+          _userService.cart.length === 0 && _userService.lastOrder.length > 0
+        "
+        >Your last purchase was on
+        {{ _userService.lastOrder[0].deliveryDate | date }}</app-status-message
+      >
+      <app-status-message
+        >We have {{ _productsService.products.length }} available product{{
+          _productsService.products.length !== 1 ? "s" : ""
+        }}
+        for you to browse through.</app-status-message
+      >
+      <app-status-message *ngIf="_storeService.numberOfOrders !== 0"
+        >Join {{ _storeService.numberOfOrders }} satisfied customer{{
+          _storeService.numberOfOrders !== 1 ? "s" : ""
+        }}
+        who {{ _storeService.numberOfOrders !== 1 ? "have" : "has" }} already
+        purchased on our site!</app-status-message
+      >
+      <app-status-message *ngIf="_storeService.numberOfOrders === 0"
+        >Be the first to buy on our site!</app-status-message
+      >
+      <p *ngIf="!_userService.user.firstName" class="doselect">Sign in as: admin@gmail.com or user@admin.com.</p>
+      <p *ngIf="!_userService.user.firstName" class="doselect">Password: 1234</p>
+    </div>
+    <div class="yes-admin" *ngIf="_userService.user.isAdmin == true">
+      <app-status-message>You are the best admin ever!</app-status-message>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Merienda&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #DCDCDC;
+    font-family: 'Quicksand', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+hr {
+    margin: 10px 0 10px 0;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+
+*::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgba(255, 217, 0, 0.5);
+}
+
+.general-btn {
+    background-color: rgba(255, 255, 255, 0);
+    font-weight: bold;
+    border: 5px solid rgba(0, 0, 0, 0);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out, border 1.5s step-start;
+}
+.yellow-btn:hover {
+    background-color: rgba(250, 220, 50, 0.664);
+    border: 5px solid rgba(255, 246, 198, 0.726);
+    color: black
+}
+
+.icon-btn {
+    padding: 2px 5px 0px 5px;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid rgba(0, 0, 0, 0);
+    cursor: pointer;
+}
+
+.icon-btn:disabled {
+    cursor: default;
+
+}
+
+.icon-btn:disabled > img {
+    filter: none;
+}
+
+.icon-btn > img {
+    width: 1.5rem;
+}
+
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.623);
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.icon-btn:disabled {
+    background-color: initial;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.icon-btn:disabled:hover {
+    background-color: initial;
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.disabled-btn:disabled:hover {
+    background-color: rgba(110, 110, 110, 0.664);
+    border: 5px solid rgba(216, 216, 216, 0.726);
+    color: black;
+    cursor: default;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+  .doselect {
+    -webkit-touch-callout: text; /* iOS Safari */
+      -webkit-user-select: text; /* Safari */
+       -khtml-user-select: text; /* Konqueror HTML */
+         -moz-user-select: text; /* Old versions of Firefox */
+          -ms-user-select: text; /* Internet Explorer/Edge */
+              user-select: text; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }

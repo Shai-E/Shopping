@@ -1,0 +1,213 @@
+
+
+
+<div class="profile-container">
+  <div *ngIf="_userService.user.isAdmin == false" class="form-container">
+    <input
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-receipts-checkbox"
+    />
+    <label
+      for="update-receipts-checkbox"
+      class="update-checkbox-label"
+      id="update-receipts-checkbox-label"
+    >
+      <h1>View Old Receipts</h1>
+    </label>
+    <form class="update-checkbox-form" id="update-receipts-checkbox-form">
+      <p *ngIf="_userService.user.receipts?.length === 0">No orders have been placed yet. <a routerLink="../shop">Go to our shop</a>.</p>
+      <li *ngFor="let receipt of _userService.user.receipts">
+        <a [href]="'/assets/receipts/' + receipt.name" target="_blank">
+          {{receipt.name}} - {{ receipt.orderDate | date }}
+        </a>
+      </li>
+    </form>
+  </div>
+  <div class="form-container">
+    <input
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-picture-checkbox"
+    />
+    <label
+      for="update-picture-checkbox"
+      class="update-checkbox-label"
+      id="update-picture-checkbox-label"
+    >
+      <h1>Change Profile Picture</h1>
+    </label>
+    <form
+      #fPicture="ngForm"
+      (ngSubmit)="onSubmitPicture(fPicture)"
+      class="update-checkbox-form"
+      id="update-picture-checkbox-form"
+    >
+      <label for="myImage" class="myImageLabel">
+        <img
+          [src]="fileUrl?fileUrl:
+            (_userService.user.picture
+              ? '../assets/images/profiles/' + _userService.user.picture
+              : '../assets/images/profiles/shoppingcart.jpg')
+          "
+          alt="some picture here"
+        />
+      </label>
+      <input
+        type="file"
+        name="myImage"
+        id="myImage"
+        accept="image/*"
+        (change)="selectImage($event)"
+        required
+      />
+      <input type="submit" class="general-btn yellow-btn disabled-btn" value="Upload" [disabled]="!file || fPicture.invalid" />
+    </form>
+  </div>
+
+  <div class="form-container">
+    <input
+      *ngIf="_userService.user.isAdmin == false"
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-address-checkbox"
+    />
+    <label
+      *ngIf="_userService.user.isAdmin == false"
+      for="update-address-checkbox"
+      class="update-checkbox-label"
+      id="update-address-checkbox-label"
+    >
+      <h1>Change Your Address</h1>
+    </label>
+    <form
+      *ngIf="_userService.user.isAdmin == false"
+      #fAddress="ngForm"
+      (ngSubmit)="onSubmitEdit(fAddress)"
+      class="update-checkbox-form"
+      id="update-address-checkbox-form"
+    >
+      city:
+      <select type="text" [(ngModel)]="city" name="city">
+        <option selected disabled value="">Select City</option>
+        <option *ngFor="let c of _storeService.cities">{{ c }}</option>
+      </select>
+      street:
+      <input
+        type="text"
+        [(ngModel)]="street"
+        name="street"
+        placeholder="street"
+      />
+      <button class="general-btn yellow-btn disabled-btn" [disabled]="!fAddress.dirty">Update Address</button>
+    </form>
+  </div>
+
+  <div class="form-container">
+    <input
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-email-checkbox"
+    />
+    <label
+      for="update-email-checkbox"
+      class="update-checkbox-label"
+      id="update-email-checkbox-label"
+    >
+      <h1>Set a New Email</h1>
+    </label>
+    <form
+      #fEmail="ngForm"
+      (ngSubmit)="onSubmitEdit(fEmail)"
+      class="update-checkbox-form"
+      id="update-email-checkbox-form"
+    >
+      Email:
+      <input
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        placeholder="email"
+        required
+      />
+      <button class="general-btn yellow-btn disabled-btn" [disabled]="!fEmail.dirty || email===_userService.user.email">Update Email</button>
+    </form>
+  </div>
+
+  <div class="form-container">
+    <input
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-password-checkbox"
+    />
+    <label
+      for="update-password-checkbox"
+      class="update-checkbox-label"
+      id="update-password-checkbox-label"
+    >
+      <h1>Set a New Password</h1>
+    </label>
+    <form
+      #fPassword="ngForm"
+      (ngSubmit)="onSubmitEdit(fPassword)"
+      class="update-checkbox-form"
+      id="update-password-checkbox-form"
+    >
+      <input
+        type="password"
+        [(ngModel)]="oldPassword"
+        name="oldPassword"
+        placeholder="Old Password"
+        required
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="New Password"
+        required
+        (keyup)="validatePassword()"
+      />
+    <input type="password" [(ngModel)]="conPwd" name="confirmPwd" placeholder="Confirm Password" required (keyup)="validatePassword()"/>
+
+      <button class="general-btn yellow-btn disabled-btn" [disabled]="fPassword.invalid">Update Password</button>
+    </form>
+  </div>
+
+  <div class="form-container">
+    <input
+      type="checkbox"
+      class="update-checkbox-input"
+      id="update-name-checkbox"
+    />
+    <label
+      for="update-name-checkbox"
+      class="update-checkbox-label"
+      id="update-name-checkbox-label"
+    >
+      <h1>Change Your Name</h1>
+    </label>
+    <form
+      #fName="ngForm"
+      (ngSubmit)="onSubmitEdit(fName)"
+      class="update-checkbox-form"
+      id="update-name-checkbox-form"
+    >
+      <input
+      [ngStyle]="{'text-transform':'capitalize'}"
+        type="text"
+        [(ngModel)]="firstName"
+        name="firstName"
+        placeholder="First Name"
+      />
+      <input
+      [ngStyle]="{'text-transform':'capitalize'}"
+        type="text"
+        [(ngModel)]="lastName"
+        name="lastName"
+        placeholder="Last Name"
+      />
+      <button [disabled]="firstName==='' && lastName===''" class="general-btn yellow-btn disabled-btn">Update Name</button>
+    </form>
+  </div>
+</div>

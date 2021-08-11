@@ -1,0 +1,126 @@
+<div *ngIf="isOrderSuccessful && _userService.receiptFileName && _userService.cart.length === 0" class="order-success-message">
+  <h1>Success!</h1>
+  <div >
+
+    <a [href]="'/assets/receipts/' + _userService.receiptFileName" download>Download</a> or
+    <a [href]="'/assets/receipts/' + _userService.receiptFileName" target="_blank">View</a>
+    your latest receipt, or go to <a (click)="closeSuccessfulOrderModalAndRouteTo('profile')">your personal profile</a> to view all previous receipts.
+  </div>
+  <a (click)="closeSuccessfulOrderModalAndRouteTo('home')" class="general-btn ok-btn">ok</a>
+</div>
+<div class="toggle-container">
+  <div class="cart-container">
+
+    <app-cart-header [isReadyToPlaceOrder]="isReadyToPlaceOrder" [city]="city" [street]="street" (searchInputEvent)="setSearchKey($event)"></app-cart-header>
+
+    <div class="cart-products" id="cart-component-products">
+      <app-cart-item *ngFor="let cartItem of _userService.cart" [cartItem]="cartItem" [searchKey]="searchKey" [isReadyToPlaceOrder]="isReadyToPlaceOrder" class="cart-product"></app-cart-item>
+    </div>
+
+    <div class="cart-total">Total: {{ _userService.total }}₪</div>
+    <button
+    *ngIf="_userService.total !== 0"
+    (click)="changeReadyState()"
+    class="general-btn yellow-btn display-order-btn"
+    >
+    {{ isReadyToPlaceOrder ? "Back to cart" : "Place Order" }}
+  </button>
+  <hr />
+  <div class="cart-order">
+    <button class="remove-all-btn" *ngIf="!isReadyToPlaceOrder && _userService.cart.length !== 0" (click)="_userService.removeAllProductsFromCart()"> &nbsp;&times; CLEAR CART &times;&nbsp; </button>
+      <form
+        *ngIf="isReadyToPlaceOrder && _userService.cart.length !== 0 && !_userService.loadingReciept"
+        #f="ngForm"
+        (submit)="onSubmit($event, f)"
+      >
+        <h4>Credit Card:</h4>
+        <div class="card-inputs">
+          <input
+            class="inputCard"
+            type="tel"
+            pattern="[0-9]{4}"
+            [(ngModel)]="creditCard1"
+            #cc1
+            name="creditCard1"
+            placeholder="xxxx"
+            maxlength="4"
+            minlength="4"
+            (keydown)="onDigitInput($event, 1)"
+            required
+          />
+          -
+          <input
+            class="inputCard"
+            type="tel"
+            pattern="[0-9]{4}"
+            [(ngModel)]="creditCard2"
+            #cc2
+            name="creditCard2"
+            placeholder="xxxx"
+            maxlength="4"
+            minlength="4"
+            (keydown)="onDigitInput($event, 2)"
+            required
+          />
+          -
+          <input
+            class="inputCard"
+            type="tel"
+            pattern="[0-9]{4}"
+            [(ngModel)]="creditCard3"
+            #cc3
+            name="creditCard3"
+            placeholder="xxxx"
+            maxlength="4"
+            minlength="4"
+            (keydown)="onDigitInput($event, 3)"
+            required
+          />
+          -
+          <input
+            class="inputCard"
+            type="tel"
+            pattern="[0-9]{4}"
+            [(ngModel)]="creditCard4"
+            #cc4
+            name="creditCard4"
+            placeholder="xxxx"
+            maxlength="4"
+            minlength="4"
+            (keydown)="onDigitInput($event, 4)"
+            required
+          />
+        </div>
+        <br />
+        <h4>Delivery Date:</h4>
+        <div class="date-input">
+          <input type="date" [(ngModel)]="date" name="date" required #dateInput (change)="handleDateChange($event)"/> <span>&nbsp;{{isDateError}}</span>
+        </div>
+        <br />
+        <div class="address-inputs">
+          <p>Specify an address for delivery:</p>
+          <p [ngStyle]="{ 'font-size': 'small' }">
+            (Leave blank to use your registered address)
+          </p>
+          <input
+            type="text"
+            [(ngModel)]="city"
+            placeholder="city"
+            name="city"
+            (dblclick)="injectValue('city')"
+          />
+          <input
+            type="text"
+            [(ngModel)]="street"
+            placeholder="street"
+            name="street"
+            (dblclick)="injectValue('street')"
+          />
+        </div>
+        <button [disabled]="f.invalid || !city && !_userService.user.city || !street && !_userService.user.street || isDateError" class="general-btn yellow-btn disabled-btn">Place Order</button>
+      </form>
+      <div *ngIf="_userService.loadingReciept">Loading...</div>
+    </div>
+  </div>
+</div>
+

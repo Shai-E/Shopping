@@ -1,0 +1,33 @@
+.home {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 100%;
+    background-image: url("/assets/images/backgrounds/mainbg2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    overflow: hidden;
+    font-family: 'Merienda', cursive;
+}
+
+@media only screen and (max-width: 1500px){
+    .about-component{
+        display: none;
+    }
+
+    .home {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media only screen and (max-width: 1120px){
+    .home {
+        display: flex;
+        overflow-y: auto;
+        overflow: visible;
+        height:100%;
+        justify-content: flex-end;
+        flex-direction: column-reverse;
+    }
+}

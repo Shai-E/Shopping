@@ -1,0 +1,21 @@
+POST http://localhost:3002/shopping/api/products/add
+Content-Type: application/json
+
+{ 
+    "name": "yellow top", 
+    "price": 200,
+    "categoryId": 1
+}
+
+###
+GET  http://localhost:3002/shopping/api/products
+### 
+PUT http://localhost:3002/shopping/api/products/update/1
+Content-Type: application/json
+
+{
+    "name": "red crop top",
+    "price": 200,
+    "categoryId": 2
+}
+

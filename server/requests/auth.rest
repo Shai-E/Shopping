@@ -1,0 +1,48 @@
+POST http://localhost:3002/shopping/api/auth/register/2
+Content-Type: application/json
+
+{
+    "id": "123456787", 
+    "firstName":"John", 
+    "lastName":"Doe", 
+    "email":"johndoe3@gmail.com", 
+    "password":"1234", 
+    "city":"Nahariya", 
+    "street":"Arvey Nahal"
+}
+
+###
+
+POST http://localhost:3002/shopping/api/auth/login
+Content-Type: application/json
+
+{ 
+    "email":"eliav.dev@gmail.com", 
+    "password":"1234"
+}
+
+###
+
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjExMTExMTExMSIsImVtYWlsIjoiZWxpYXYuZGV2QGdtYWlsLmNvbSIsImlzQWRtaW4iOjEsImlhdCI6MTYyODE4NDU2Mn0.osVVUvEBn8L88reH4DD6-bqDdL_eL126pNpA_En2Rv8"
+
+###
+
+POST http://localhost:3002/shopping/api/auth/login
+Content-Type: application/json
+
+{ 
+    "email":"eliav.dev+1@gmail.com", 
+    "password":"1234"
+}
+
+###
+
+POST http://localhost:3002/shopping/api/auth/check/email
+Content-Type: application/json
+
+{ 
+    "email":"123456782"
+}
+
+###
+DELETE http://localhost:3002/shopping/api/auth/logout/123456789

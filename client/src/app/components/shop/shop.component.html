@@ -1,0 +1,29 @@
+<div class="shop-container">
+
+    <input *ngIf="_userService.user.isAdmin==false" type="checkbox" name="toggle-cart" id="toggle-cart" [checked]="cartDisplay"/>
+    <label *ngIf="_userService.user.isAdmin==false" for="toggle-cart" class="toggle-cart-label">
+        <hr>
+    </label>
+    <app-cart *ngIf="_userService.user.isAdmin==false" class="sidebar aside-container"></app-cart>
+
+    <input *ngIf="_userService.user.isAdmin==true && _productsService.productIdsToEdit.length > 0" type="checkbox" name="toggle-edit" id="toggle-edit" />
+    <label *ngIf="_userService.user.isAdmin==true && _productsService.productIdsToEdit.length > 0" for="toggle-edit" class="toggle-edit-label">
+        <hr>
+    </label>
+    <div class="sidebar-edit aside-container" *ngIf="_userService.user.isAdmin==true && _productsService.productIdsToEdit.length > 0">
+        <button (click)="_productsService.doneEditingProducts()" class="general-btn yellow-btn done-editing-product-btn">&nbsp;&times;&nbsp;</button>
+        <app-edit-product class="edit-product-component" *ngFor="let product of _productsService.products" [product]="product"></app-edit-product>
+    </div>
+    
+    <input *ngIf="_userService.user.isAdmin==true && _userService.displayAddForm" type="checkbox" name="toggle-add" id="toggle-add" />
+    <label *ngIf="_userService.user.isAdmin==true && _userService.displayAddForm" for="toggle-add" class="toggle-add-label">
+        <hr>
+    </label>
+    <div class="sidebar-add aside-container" *ngIf="_userService.user.isAdmin==true && _userService.displayAddForm">
+        <button (click)="_productsService.doneEditingCategories()" class="general-btn yellow-btn done-editing-product-btn">&nbsp;&times;&nbsp;</button>
+        <h2>Add Options</h2>
+        <app-add-product class="add-product-component"></app-add-product>
+    </div>
+
+    <app-products class="products"></app-products>
+</div>

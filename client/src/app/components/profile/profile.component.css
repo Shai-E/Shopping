@@ -1,0 +1,129 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.profile-container form {
+  display:none;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  justify-content: center;
+
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+#myImage {
+  display: none;
+}
+
+.myImageLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+}
+
+img {
+  align-self: center;
+  max-width: 100%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 20px auto 20px auto;
+  cursor: pointer;
+}
+
+.update-checkbox-label {
+  cursor: pointer;
+}
+
+.update-checkbox-input ~ .update-checkbox-label>h1:hover::before {
+  content: "✏ "
+}
+
+.update-checkbox-input:checked ~ .update-checkbox-label>h1:hover::before {
+  content: ""
+}
+
+.update-checkbox-input {
+  display: none;
+}
+
+#update-picture-checkbox:checked ~ #update-picture-checkbox-form,
+#update-address-checkbox:checked ~ #update-address-checkbox-form,
+#update-email-checkbox:checked ~ #update-email-checkbox-form,
+#update-name-checkbox:checked ~ #update-name-checkbox-form,
+#update-receipts-checkbox:checked ~ #update-receipts-checkbox-form,
+#update-password-checkbox:checked ~ #update-password-checkbox-form
+ {
+  display: flex;
+}
+
+#update-picture-checkbox:checked ~ #update-picture-checkbox-label,
+#update-address-checkbox:checked ~ #update-address-checkbox-label,
+#update-email-checkbox:checked ~ #update-email-checkbox-label,
+#update-name-checkbox:checked ~ #update-name-checkbox-label,
+#update-receipts-checkbox:checked ~ #update-receipts-checkbox-label,
+#update-password-checkbox:checked ~ #update-password-checkbox-label
+ {
+  transform: rotateZ(180deg);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.form-container {
+  min-width: 600px;
+  width: fit-content;
+  display: flex;
+  margin: 20px;
+  padding-right: 40px;
+}
+
+h1 {
+  padding: 5px;
+  border-radius: 25px;
+  font-family: 'Merienda', cursive;
+
+}
+h1:hover {
+  background: radial-gradient(circle, rgba(255, 217, 0, 0.479) 0%, rgba(255, 217, 0, 0.308) 35%, rgba(255, 217, 0, 0) 100%);
+  text-shadow: 0px 0px 3px white;
+}
+
+@media only screen and (max-width: 780px){
+  .form-container {
+    min-width: 0;
+    width: 100%;
+    padding-right: 0;
+  }
+
+  h1{
+    font-size: larger;
+  }
+
+  .profile-container form {
+    display:none;
+    flex-direction: column;
+    width: 100%;
+    padding: 15px;
+    justify-content: center;
+  
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+  }
+}

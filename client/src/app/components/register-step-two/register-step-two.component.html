@@ -1,0 +1,11 @@
+<h2>Delivery Info</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <select type="text" [(ngModel)]="city" name="city" required>
+        <option selected disabled value="">Select City</option>
+        <option *ngFor="let c of _storeService.cities">{{c}}</option>
+    </select>
+    <input type="text" [(ngModel)]="street" name="street" placeholder="street" required/>
+    <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="first name" required/>
+    <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="last name" required/>
+    <button class="general-btn yellow-btn disabled-btn" type="submit"  [disabled]="f.invalid">Submit</button>
+</form>

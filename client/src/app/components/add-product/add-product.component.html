@@ -1,0 +1,38 @@
+<div class="admin-option-container new-category-container">
+  <h2>Create a New Category</h2>
+  <form #fNewCategory="ngForm" (ngSubmit)="onSubmitNewCategory(fNewCategory)">
+    <input
+      type="text"
+      name="category"
+      placeholder="Category Name"
+      [(ngModel)]="category"
+      required
+    />
+    <button
+      [disabled]="fNewCategory.invalid"
+      class="create-category-btn general-btn yellow-btn disabled-btn"
+    >
+      Create
+    </button>
+  </form>
+</div>
+<div class="admin-option-container new-product-container">
+  <h2>Add a New Product</h2>
+  <form #fNewProd="ngForm" (ngSubmit)="onSubmitNewProduct(fNewProd)">
+    <select [(ngModel)]="categoryId" name="categoryId" required>
+      <option value="0" selected disabled>Select Category</option>
+      <option *ngFor="let c of _productsService.categories" [value]="c.id">
+        {{ c.category }}
+      </option>
+    </select>
+    <input
+      type="text"
+      [(ngModel)]="name"
+      name="name"
+      placeholder="Product Name"
+      required
+    />
+    <input type="number" [(ngModel)]="price" name="price" placeholder="Price" class="product-price-input" required/>
+    <button [disabled]="fNewProd.invalid" class="add-product-btn general-btn yellow-btn disabled-btn">Add Product</button>
+  </form>
+</div>

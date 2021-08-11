@@ -1,0 +1,12 @@
+GET http://localhost:3002/shopping/api/carts/123456786
+
+###
+POST http://localhost:3002/shopping/api/carts/add-item
+Content-Type: application/json
+
+{
+    "cartId": 1, "productId": 2, "amount":2
+}
+
+###
+DELETE http://localhost:3002/shopping/api/carts/remove-item/2

@@ -1,0 +1,123 @@
+.shop-container {
+    display: flex;
+    justify-content: center;
+    background-image: url("/assets/images/backgrounds/wallpaper-for-man-162.jpg");
+    width: 100%;
+    height: 100%;
+    background-attachment: relative;
+    background-position: top left;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.products {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.sidebar {
+    width: 40%;
+    height: 100%;
+    opacity:100%;
+    min-width:340px;
+    transition: min-width 1s ease-in-out ,width 1s ease-in-out, opacity .9s ease-in-out;
+}
+
+.sidebar-edit, .sidebar-add {
+    width: 40%;
+    min-width:340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    opacity:100%;
+    overflow-y: auto;
+    overflow-x: hidden; /*new-style*/
+    transition: min-width 1s ease-in-out ,width 1s ease-in-out, opacity .9s ease-in-out, margin-right 1s ease-in-out,margin-left 1s ease-in-out;
+    background: rgba( 255, 255, 255, 0.5 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    border-radius: 10px 2px 2px 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.edit-product-component, .add-product-component {
+    width: 100%;
+}
+
+
+.toggle-cart-label, .toggle-edit-label, .toggle-add-label {
+    display: flex;
+    flex-direction: column;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    cursor: pointer;
+    transform: rotateZ(180deg);
+    align-items: stretch;
+    text-align: center;
+}
+
+#toggle-cart, #toggle-edit, #toggle-add {
+    display: none;
+}
+
+#toggle-cart:checked ~ .sidebar {
+    width: 0%;
+    opacity:0%;
+    min-width: 0;
+}
+
+#toggle-edit:checked ~ .sidebar-edit {
+    width: 0%;
+    opacity:0%;
+    min-width: 0;
+}
+
+#toggle-add:checked ~ .sidebar-add {
+    width: 0%;
+    opacity:0%;
+    min-width: 0;
+}
+
+#toggle-cart ~ .toggle-cart-label::before {
+    content: "Hide Cart";
+}
+
+#toggle-cart:checked ~ .toggle-cart-label::before {
+    content: "Open Cart";
+}
+
+#toggle-edit ~ .toggle-edit-label::before {
+    content: "Hide Edit List";
+}
+
+#toggle-edit:checked ~ .toggle-edit-label::before {
+    content: "Open Edit List";
+}
+
+#toggle-add ~ .toggle-add-label::before {
+    content: "Hide Add Options";
+}
+
+#toggle-add:checked ~ .toggle-add-label::before {
+    content: "Add Category or Product";
+}
+
+@media only screen and (max-width: 780px){
+    .aside-container {
+        position: absolute;
+        left: 20px;
+        width: calc(100% - 20px);
+        height: calc(85%);
+        z-index:101;
+        background-color: ivory;
+    }
+    #toggle-edit:checked ~ .aside-container {
+        width: 0%;
+        opacity:0%;
+    }
+}

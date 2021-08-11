@@ -1,0 +1,11 @@
+<h2>Set Up Your Account</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <input type="text" [(ngModel)]="id" name="id" placeholder="ID number" required (keyup)="validateForm('id')"/>
+    <input type="email" [(ngModel)]="email" name="email" placeholder="email" required (keyup)="validateForm('email')"/>
+    <input type="password" [(ngModel)]="password" name="password" placeholder="password" required (keyup)="validateForm('password')"/>
+    <input type="password" [(ngModel)]="conPwd" name="confirmPwd" placeholder="confirm password" required (keyup)="validateForm('password')"/>
+    <button class="general-btn yellow-btn disabled-btn" type="submit"  [disabled]="f.invalid || password!==conPwd || errors.id!=='' || errors.email!==''">Submit</button>
+    <p *ngIf="errors.id!==''">{{errors.id}}</p>
+    <p *ngIf="errors.email!==''">{{errors.email}}</p>
+    <p *ngIf="errors.password!==''">{{errors.password}}</p>
+</form>

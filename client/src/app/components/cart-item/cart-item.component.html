@@ -1,0 +1,26 @@
+<div class="cart-item">
+    <img *ngIf="cartItem.picture?.length !== 0 && !isReadyToPlaceOrder" 
+        [src]="'/assets/images/uploads/' + cartItem.picture![0]" [alt]="cartItem.name" class="cart-item-img"/>
+    <div class="item-details">
+        <div class="prod-name" [innerHTML]="cartItem.name | highlight: searchKey">{{ cartItem.name }}</div>
+        <div [innerHTML]="cartItem.size | highlight: searchKey" class="prod-size">{{ cartItem.size }}</div>
+        <div class="item-amount">
+            Qty:
+            <button
+                class="amount-btn minus"
+                *ngIf="!isReadyToPlaceOrder"
+                [disabled]="cartItem.amount === 0"
+                (click)="cartItem.amount === 1 ? removeItem(cartItem.id!) : decreaseAmount(cartItem.id!)"
+            >-</button>
+            {{ cartItem.amount }}
+            <button
+                class="amount-btn plus"
+                *ngIf="!isReadyToPlaceOrder"
+                (click)="increaseAmount(cartItem.id!)"
+            >+</button>
+        </div>
+        <div><button class="remove-btn" *ngIf="!isReadyToPlaceOrder" 
+                    (click)="removeItem(cartItem.id!)">Remove Item</button></div>
+    </div>
+</div>
+<div class="prod-price">{{ cartItem.price }}₪</div>

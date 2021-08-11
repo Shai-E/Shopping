@@ -1,0 +1,13 @@
+.cart-header {
+    align-self: flex-start;
+}
+
+.delivery-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-status {
+    display: flex;
+    justify-content: space-between;
+}

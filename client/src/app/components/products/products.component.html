@@ -1,0 +1,28 @@
+<div class="products-container">
+    <label for="nav-toggle-mobile" class="nav-toggle-mobile-label">
+        <img src="assets/images/icons/menu.png" alt="" width="25">
+    </label>
+    <input type="checkbox" name="nav-toggle-mobile" id="nav-toggle-mobile" class="nav-toggle-mobile" [checked]="mobileProductsNavChecked">
+    <div class="category-nav">
+        <div class="btns" *ngIf="!isChecked">
+            <button *ngFor="let category of _productsService.activeCategories" [ngClass]="category.category===_productsService.currCategory?'active-category':''" (click)="displayCategory(category.category)">{{category.category}}</button>
+            <button (click)="displayCategory('')" [ngClass]="_productsService.currCategory===''?'active-category':''">all</button>
+            <input type="checkbox" id="addToggle" *ngIf="_userService.user.isAdmin==true" [checked]="this._userService.displayAddForm" (click)="displayAddForm()">
+            <label for="addToggle" id="addLabel" *ngIf="_userService.user.isAdmin==true"></label>
+        </div>
+        <div class="inputs">
+            <input type="checkbox" name="searchToggle" id="searchToggle" [(ngModel)]="isChecked" (click)="handleSearchToggle()"/>
+            <label for="searchToggle" id="searchLabel"></label>
+            <input type="text" placeholder="search" *ngIf="isChecked" (keyup)="filterProducts($event)"/>
+        </div>
+    </div>
+    <div *ngIf="isLoading">Loading...</div>
+    <div class="products" *ngIf="!isLoading">
+        <div *ngFor="let product of _productsService.productsToDisplay" class="prod-item">
+            <app-product [product]="product"></app-product>
+        </div>
+        <div *ngFor="let product of _productsService.products" class="prod-item">
+            <app-product *ngIf="_productsService.currCategory===''" [product]="product"></app-product>
+        </div>
+    </div>
+</div>

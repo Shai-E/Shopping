@@ -1,0 +1,10 @@
+.forbidden {
+    display: flex;
+    flex-direction: column;
+    width:fit-content;
+    margin: auto;
+}
+
+.forbidden > img {
+    max-width: 600px;
+}

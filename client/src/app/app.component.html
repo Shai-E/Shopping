@@ -1,0 +1,25 @@
+<div *ngIf="_userService.responseMessage" class="responseMessage">{{_userService.responseMessage}}</div>
+<div class="app-container">
+  <header>
+    <h1 class="main-title">
+      <a routerLink="/home" [ngStyle]="{'text-transform':'uppercase'}">de moda caliente <span class="small-title-span" [ngStyle]="{'font-size':'small'}">house of fashion</span></a>
+    </h1>
+    <div class="flex profile-toggle">
+        <div>
+          <span *ngIf="!userOptions && _userService.user.id" [ngStyle]="{'cursor':'pointer','text-transform':'capitalize'}" (click)="displayUserOptions()">{{_userService.user.firstName}} {{_userService.user.lastName}}&nbsp;</span>
+          <span *ngIf="userOptions && _router.url !== '/home'" routerLink="home" [ngStyle]="{'cursor':'pointer'}" (click)="displayUserOptions()">Home</span>
+          <span *ngIf="userOptions && _router.url !== '/home'"> | </span>
+          <span *ngIf="userOptions && _userService.user.id && _router.url !== '/profile'" routerLink="/profile" [ngStyle]="{'cursor':'pointer'}" (click)="displayUserOptions()">Profile&nbsp;</span>
+          <span *ngIf="userOptions && _userService.user.id && _router.url !== '/profile'">| </span>
+          <span *ngIf="userOptions && _userService.user.id && _router.url !== '/shop'" routerLink="/shop" [ngStyle]="{'cursor':'pointer'}" (click)="displayUserOptions()">Shop&nbsp;</span>
+          <span *ngIf="userOptions && _userService.user.id && _router.url !== '/shop'">| </span>
+          <span *ngIf="userOptions && _userService.user.id" [ngStyle]="{'cursor':'pointer'}" (click)="logUserOut();">Logout&nbsp;</span>
+          <span *ngIf="userOptions && !_userService.user.id" [ngStyle]="{'cursor':'pointer'}" (click)="redirectToLogin();">Login&nbsp;</span>
+        </div>
+        <img [src]="_userService.user.picture?'/assets/images/profiles/'+_userService.user.picture:'/assets/images/profiles/shoppingcart.jpg'" class="user-pic" alt="" (click)="displayUserOptions()">
+    </div>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
